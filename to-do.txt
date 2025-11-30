@@ -1,0 +1,5 @@
+1- Fix the leftWeight rightWeight Displays after Reset
+2- Add the Next Weight Indicator
+3- CSS Updates
+4- Add README.md
+5- Tutorial Video
