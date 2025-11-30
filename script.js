@@ -59,17 +59,16 @@ function render() {
 
         if (i.side === "left") {
             div.style.left = (200 - i.distance) + 'px';
-            leftWeightDisplay.innerText = leftTotalWeight + " KG";
         }
        
         else {
             div.style.left = (200 + i.distance) + 'px';
-            rightWeightDisplay.innerText = rightTotalWeight + " KG";
         }
 
         plank.appendChild(div);
     });
-
+    leftWeightDisplay.innerText = leftTotalWeight + " KG";
+    rightWeightDisplay.innerText = rightTotalWeight + " KG";
     plank.style.transform = `rotate(${state.angle}deg)`;
  
     angleDisplay.innerText = state.angle.toFixed(1) + "°";
