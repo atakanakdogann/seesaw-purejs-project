@@ -1,5 +1,6 @@
 const maxAngle = 30, minAngle = -30;
 let weightCounter = 0;
+let weight, randomColor;
 let leftTotalWeight, rightTotalWeight;
 let state = {
     weights: [],
@@ -8,6 +9,7 @@ let state = {
 const plank = document.getElementById('plank');
 const leftWeightDisplay = document.getElementById('left-weight');
 const rightWeightDisplay = document.getElementById('right-weight');
+const nextWeightDisplay = document.getElementById('next-weight');
 const angleDisplay = document.getElementById('tilt-angle');
 const logsContainer = document.getElementById('logs');
 const resetButton = document.getElementById('reset-button');
@@ -16,14 +18,14 @@ function updateBalance() {
     let leftTorque = 0;
     let rightTorque = 0;
 
-    leftTotalWeight = 0;
+    leftTotalWeight = 0; 
     rightTotalWeight = 0;
-   
+    
     state.weights.forEach(function(i) {
         if (i.side === "left"){
             leftTorque += i.weight * i.distance;
             leftTotalWeight += i.weight;
-        }
+        } 
         else {
             rightTorque += i.weight * i.distance;
             rightTotalWeight += i.weight;
@@ -37,30 +39,29 @@ function updateBalance() {
     }
     if (calculatedAngle < minAngle){
         calculatedAngle = minAngle;
-    }
+    } 
 
     state.angle = calculatedAngle;
 }
 
 function render() {
-   
+    
     updateBalance();
 
-    plank.innerHTML = '';
+    plank.innerHTML = ''; 
 
     state.weights.forEach(function(i) {
         const div = document.createElement('div');
         div.className = 'weight-object';
         div.innerText = i.weight + "KG";
-       
+        
         div.style.backgroundColor = i.color;
         div.style.width = (30 + i.weight * 2) + 'px';
         div.style.height = (30 + i.weight * 2) + 'px';
 
         if (i.side === "left") {
             div.style.left = (200 - i.distance) + 'px';
-        }
-       
+        }       
         else {
             div.style.left = (200 + i.distance) + 'px';
         }
@@ -69,11 +70,16 @@ function render() {
     });
     leftWeightDisplay.innerText = leftTotalWeight + " KG";
     rightWeightDisplay.innerText = rightTotalWeight + " KG";
+
     plank.style.transform = `rotate(${state.angle}deg)`;
  
     angleDisplay.innerText = state.angle.toFixed(1) + "°";
 
     localStorage.setItem('seesawState', JSON.stringify(state));
+
+    weight = Math.floor(Math.random() * 10) + 1;
+    randomColor = `rgb(${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)})`;
+    nextWeightDisplay.innerText = weight + " KG";
 }
 
 
@@ -89,15 +95,14 @@ plank.addEventListener('click', (e) => {
     const rad = state.angle * (Math.PI / 180);
 
     const rotatedX = (dx * Math.cos(rad)) + (dy * Math.sin(rad));
-   
-    //let clickX = e.clientX - rect.left;
+    
     let distance = 0;
     let side = "";
 
     if (rotatedX < 0) {
         side = "left";
         distance = Math.abs(rotatedX);
-    }
+    } 
     else {
         side = "right";
         distance = rotatedX;
@@ -106,9 +111,6 @@ plank.addEventListener('click', (e) => {
     if (distance > 200) {
         distance = 200;
     }
-   
-    const weight = Math.floor(Math.random() * 10) + 1;
-    const randomColor = `rgb(${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)})`;
 
     const newWeight = {
         weight: weight,
