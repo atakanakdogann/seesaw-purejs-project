@@ -6,11 +6,15 @@ This project is an interactive online simulation of realistic seesaw that users 
 **Demo Link:** [Click Here to see Demo](https://atakanakdogann.github.io/seesaw-purejs-project/)
 
 ## Features and Architecture:
-1- Pure JS: There is no external libraries or tools used within this project. Main focus was about DOM Manipulation and logic
-2- Physics Engine: I used Weight x Distance formula to obtain Torque and find the tilt angle.
-3- Weight Placing: There is some trigonometric calculations to ifnd exact point of user clicks works same in every angle plank became.
-4- Users can see the history and informations of weight drops. The information says the location of the placement, side and amount of the weight.
-5- Local Storage: To save and restore progress when page is reloaded, Local Storage is used.
+1. Pure JS: There is no external libraries or tools used within this project. Main focus was about DOM Manipulation and logic
+
+2. Physics Engine: I used Weight x Distance formula to obtain Torque and find the tilt angle.
+
+3. Weight Placing: There is some trigonometric calculations to ifnd exact point of user clicks works same in every angle plank became.
+
+4. Users can see the history and informations of weight drops. The information says the location of the placement, side and amount of the weight.
+
+5. Local Storage: To save and restore progress when page is reloaded, Local Storage is used.
 
 ## Thought Process:
 In the main script of the project, i used `render` function to create/update visual every time a new object dropped. In render() logic, every time looks for all objects and it creates weight-object div for that and html texts etc. are set. Local Store set operation also handled here. 
